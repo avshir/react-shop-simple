@@ -20,3 +20,23 @@
 .price {
   font-size: 20px;
 }
+
+.cart {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+
+  cursor: pointer;
+  z-index: 5;
+  padding: 1rem;
+}
+
+.cart-quantity {
+}
+
+@media (min-width: 767px) {
+  .cart {
+    top: 5rem;
+    bottom: unset;
+  }
+}

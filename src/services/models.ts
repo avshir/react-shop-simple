@@ -92,3 +92,14 @@ export interface IGood {
   tileSize: string;
   categories: Array<string>;
 }
+
+export interface ICartItem {
+  mainId: string;
+  displayName: string;
+  price: {
+    regularPrice: number;
+    finalPrice: number;
+    floorPrice: number;
+  };
+  quantity: number;
+}
