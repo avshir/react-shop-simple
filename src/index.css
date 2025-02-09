@@ -31,7 +31,43 @@
   padding: 1rem;
 }
 
-.cart-quantity {
+.basket-list {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  width: 400px;
+  max-width: 95%;
+  z-index: 5;
+  animation: show 500ms ease-in-out;
+}
+
+.basket-delete {
+  cursor: pointer;
+}
+
+.basket-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  cursor: pointer;
+}
+
+.basket-quantity {
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+@keyframes show {
+  from {
+    top: 70%;
+    opacity: 0;
+  }
+  to {
+    top: 50%;
+    opacity: 1;
+  }
 }
 
 @media (min-width: 767px) {
