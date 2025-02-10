@@ -8,9 +8,9 @@ const Footer = () => {
             className='grey-text text-lighten-4 right'
             href='https://github.com/avshir/react-shop-simple'
             target='_blank'
-            rel="noreferrer"
+            rel='noreferrer'
           >
-            Repo
+            Repo avshir
           </a>
         </div>
       </div>

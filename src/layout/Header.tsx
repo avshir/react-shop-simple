@@ -2,7 +2,10 @@ const Header = () => {
   return (
     <nav className='indigo darken-1'>
       <div className='nav-wrapper container'>
-        <a href='/' className='brand-logo'>
+        <a
+          href='https://avshir.github.io/react-shop-simple/'
+          className='brand-logo'
+        >
           React Simple Shop
         </a>
         <ul id='nav-mobile' className='right hide-on-med-and-down'>
