@@ -6,14 +6,14 @@ import GoodsList from "../components/GoodsList";
 import Cart from "../components/Cart";
 import { ICartItem, IGood } from "../services/models";
 import BasketList from "../components/BasketList";
+import Alert from "../components/Alert";
 
 const Shop = () => {
   const [goods, setGoods] = useState<IGood[]>([]);
   const [loading, setLoading] = useState(true);
   const [order, setOrder] = useState<ICartItem[] | []>([]);
   const [isBasketShow, setIsBasketShow] = useState(false);
-  // console.log("goods >>", goods);
-  console.log("order >>", order);
+  const [alertName, setAlertName] = useState("");
 
   const handleBasketShow = () => {
     setIsBasketShow(!isBasketShow);
@@ -39,6 +39,7 @@ const Shop = () => {
       });
       setOrder(newOrder);
     }
+    setAlertName(item.displayName)
   };
 
   const removeFromBasket = (itemId: string) => {
@@ -75,13 +76,18 @@ const Shop = () => {
     setOrder(newOrder);
   };
 
+  const closeAlert= ()=> {
+    setAlertName('');
+  }
+
   useEffect(() => {
     const fetchGoods = async () => {
       const res = await fetch(API_URL, {
         headers: { Authorization: API_KEY },
       });
       const data = await res.json();
-      // console.log("data >>", data);
+
+      // show only first 30 goods from 400 
       const goods: IGood[] = data.shop.slice(0, 30);
       setGoods(goods);
       setLoading(false);
@@ -106,6 +112,7 @@ const Shop = () => {
       ) : (
         <GoodsList goods={goods} addToBasket={addToBasket} />
       )}
+      {alertName && <Alert name={alertName} closeAlert={closeAlert} />}
     </main>
   );
 };

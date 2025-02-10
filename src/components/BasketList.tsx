@@ -43,9 +43,14 @@ const BasketList = ({
       ) : (
         <li className='collection-item'>Сart is empty</li>
       )}
-      <li className='collection-item indigo accent-2 active'>
-        Total: {totalPrice} $
-      </li>
+      <div className='basket-list_total indigo accent-2'>
+        <li className=''>
+          Total: {totalPrice} $
+        </li>
+        <button className='btn-small secondary-content waves-effect waves-light basket-buy'>
+          Order
+        </button>
+      </div>
     </ul>
   );
 };
