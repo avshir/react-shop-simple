@@ -1,7 +1,5 @@
 # React + TypeScript + Vite
-- React-shop - simple shop, project 02 - Базовый курс по React М.Непомнящий, Udemy
-- [repo from michey85](https://github.com/michey85/react-shop)
-- [demo from michey85](https://michey85.github.io/react-shop/)
+- React-shop - simple shop with Cart of order
 
 ## Used
 - [API - fortniteapi.io](https://fortniteapi.io/) -  for shops, e-commerce, need to get API key, free, several langs
@@ -11,3 +9,6 @@
 - add goods to Cart
 - Cart with list of order, ability add, delete a good, remove type of a good, Total of the order
 - Alert(toast) when a good added to Cart
+
+![alt text](image.png)
+![alt text](image-1.png)
