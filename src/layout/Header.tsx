@@ -15,9 +15,6 @@ const Header = () => {
               Repo
             </a>
           </li>
-          <li>
-            <a href='badges.html'>Components</a>
-          </li>
         </ul>
       </div>
     </nav>
