@@ -1,5 +1,5 @@
 # React + TypeScript + Vite
-- React-shop - simple shop with Cart of order
+- [Demo React-shop](avshir.github.io/react-shop-simple/) - simple shop with Cart of order
 
 ## Used
 - [API - fortniteapi.io](https://fortniteapi.io/) -  for shops, e-commerce, need to get API key, free, several langs
@@ -11,4 +11,5 @@
 - Alert(toast) when a good added to Cart
 
 ![alt text](image.png)
+
 ![alt text](image-1.png)
