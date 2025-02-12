@@ -1,13 +1,16 @@
-import { ICartItem, IGood } from "../services/models";
+import { useContext } from "react";
+import { IGood } from "../services/models";
+import { ShopContext } from "../context";
 
 interface GoodItemProp {
   good: IGood;
-  addToBasket: (item: ICartItem) => void;
 }
 
-const GoodItem = ({ good, addToBasket }: GoodItemProp) => {
+const GoodItem = ({ good }: GoodItemProp) => {
   const { mainId, displayName, displayDescription, price, displayAssets } =
     good;
+
+  const { addToBasket } = useContext(ShopContext);
 
   return (
     <div className='card' id={mainId}>

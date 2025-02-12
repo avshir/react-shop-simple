@@ -1,21 +1,11 @@
-import { ICartItem } from "../services/models";
+import { useContext } from "react";
+import { ShopContext } from "../context";
+
 import BasketItem from "./BasketItem";
 
-interface BasketListProps {
-  order: ICartItem[] | [];
-  handleBasketShow: () => void;
-  removeFromBasket: (itemId: string) => void;
-  decQuantity: (itemId: string) => void;
-  incQuantity: (itemId: string) => void;
-}
+const BasketList = () => {
+  const { order, handleBasketShow } = useContext(ShopContext);
 
-const BasketList = ({
-  order,
-  handleBasketShow,
-  removeFromBasket,
-  decQuantity,
-  incQuantity,
-}: BasketListProps) => {
   const totalPrice = order.reduce(
     (sum, item) => sum + item.price.regularPrice * item.quantity,
     0
@@ -31,22 +21,12 @@ const BasketList = ({
         close
       </i>
       {order.length ? (
-        order.map((item) => (
-          <BasketItem
-            key={item.mainId}
-            item={item}
-            removeFromBasket={removeFromBasket}
-            decQuantity={decQuantity}
-            incQuantity={incQuantity}
-          />
-        ))
+        order.map((item) => <BasketItem key={item.mainId} item={item} />)
       ) : (
         <li className='collection-item'>Сart is empty</li>
       )}
       <div className='basket-list_total indigo accent-2'>
-        <li className=''>
-          Total: {totalPrice} $
-        </li>
+        <li className=''>Total: {totalPrice} $</li>
         <button className='btn-small secondary-content waves-effect waves-light basket-buy'>
           Order
         </button>
