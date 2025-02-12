@@ -1,9 +1,10 @@
-interface CartProp {
-  handleBasketShow: () => void;
-  quantity: number;
-}
+import { useContext } from "react";
+import { ShopContext } from "../context";
 
-const Cart = ({ handleBasketShow, quantity }: CartProp) => {
+const Cart = () => {
+  const { order, handleBasketShow } = useContext(ShopContext);
+  const quantity = order.length;
+
   return (
     <div className='cart indigo accent-2 white-text' onClick={handleBasketShow}>
       <i className='material-icons'>shopping_cart</i>

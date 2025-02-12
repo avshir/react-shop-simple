@@ -1,84 +1,89 @@
-import { useEffect, useState } from "react";
+import { useEffect, useContext } from "react";
 import { API_KEY, API_URL } from "../services";
+
+import { ShopContext } from "../context";
 
 import Preloader from "../components/Preloader";
 import GoodsList from "../components/GoodsList";
 import Cart from "../components/Cart";
-import { ICartItem, IGood } from "../services/models";
+import { IGood } from "../services/models";
 import BasketList from "../components/BasketList";
 import Alert from "../components/Alert";
 
 const Shop = () => {
-  const [goods, setGoods] = useState<IGood[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [order, setOrder] = useState<ICartItem[] | []>([]);
-  const [isBasketShow, setIsBasketShow] = useState(false);
-  const [alertName, setAlertName] = useState("");
+  const { goods, loading, order, isBasketShow, alertName, setGoods } =
+    useContext(ShopContext);
 
-  const handleBasketShow = () => {
-    setIsBasketShow(!isBasketShow);
-  };
-  const addToBasket = (item: ICartItem) => {
-    const itemIndex = order.findIndex(
-      (orderItem) => orderItem.mainId === item.mainId
-    );
+  // const [goods, setGoods] = useState<IGood[]>([]);
+  // const [loading, setLoading] = useState(true);
+  // const [order, setOrder] = useState<ICartItem[] | []>([]);
+  // const [isBasketShow, setIsBasketShow] = useState(false);
+  // const [alertName, setAlertName] = useState("");
 
-    if (itemIndex < 0) {
-      const newItem = { ...item, quantity: 1 };
-      setOrder([...order, newItem]);
-    } else {
-      const newOrder = order.map((orderItem, index) => {
-        if (index === itemIndex) {
-          return {
-            ...orderItem,
-            quantity: orderItem.quantity + 1,
-          };
-        } else {
-          return orderItem;
-        }
-      });
-      setOrder(newOrder);
-    }
-    setAlertName(item.displayName)
-  };
+  // const handleBasketShow = () => {
+  //   setIsBasketShow(!isBasketShow);
+  // };
+  // const addToBasket = (item: ICartItem) => {
+  //   const itemIndex = order.findIndex(
+  //     (orderItem) => orderItem.mainId === item.mainId
+  //   );
 
-  const removeFromBasket = (itemId: string) => {
-    const newOrder = order.filter((orderItem) => orderItem.mainId !== itemId);
-    setOrder(newOrder);
-  };
+  //   if (itemIndex < 0) {
+  //     const newItem = { ...item, quantity: 1 };
+  //     setOrder([...order, newItem]);
+  //   } else {
+  //     const newOrder = order.map((orderItem, index) => {
+  //       if (index === itemIndex) {
+  //         return {
+  //           ...orderItem,
+  //           quantity: orderItem.quantity + 1,
+  //         };
+  //       } else {
+  //         return orderItem;
+  //       }
+  //     });
+  //     setOrder(newOrder);
+  //   }
+  //   setAlertName(item.displayName)
+  // };
 
-  const incQuantity = (itemId: string) => {
-    const newOrder = order.map((orderItem) => {
-      if (orderItem.mainId === itemId) {
-        return {
-          ...orderItem,
-          quantity: orderItem.quantity + 1,
-        };
-      } else {
-        return orderItem;
-      }
-    });
-    setOrder(newOrder);
-  };
+  // const removeFromBasket = (itemId: string) => {
+  //   const newOrder = order.filter((orderItem) => orderItem.mainId !== itemId);
+  //   setOrder(newOrder);
+  // };
 
-  const decQuantity = (itemId: string) => {
-    const newOrder = order.map((orderItem) => {
-      if (orderItem.mainId === itemId) {
-        const newQuantity = orderItem.quantity - 1;
-        return {
-          ...orderItem,
-          quantity: newQuantity > 0 ? newQuantity : 0,
-        };
-      } else {
-        return orderItem;
-      }
-    });
-    setOrder(newOrder);
-  };
+  // const incQuantity = (itemId: string) => {
+  //   const newOrder = order.map((orderItem) => {
+  //     if (orderItem.mainId === itemId) {
+  //       return {
+  //         ...orderItem,
+  //         quantity: orderItem.quantity + 1,
+  //       };
+  //     } else {
+  //       return orderItem;
+  //     }
+  //   });
+  //   setOrder(newOrder);
+  // };
 
-  const closeAlert= ()=> {
-    setAlertName('');
-  }
+  // const decQuantity = (itemId: string) => {
+  //   const newOrder = order.map((orderItem) => {
+  //     if (orderItem.mainId === itemId) {
+  //       const newQuantity = orderItem.quantity - 1;
+  //       return {
+  //         ...orderItem,
+  //         quantity: newQuantity > 0 ? newQuantity : 0,
+  //       };
+  //     } else {
+  //       return orderItem;
+  //     }
+  //   });
+  //   setOrder(newOrder);
+  // };
+
+  // const closeAlert= ()=> {
+  //   setAlertName('');
+  // }
 
   useEffect(() => {
     const fetchGoods = async () => {
@@ -87,32 +92,20 @@ const Shop = () => {
       });
       const data = await res.json();
 
-      // show only first 30 goods from 400 
+      // show only first 30 goods from 400
       const goods: IGood[] = data.shop.slice(0, 30);
       setGoods(goods);
-      setLoading(false);
+      // setLoading(false);
     };
     fetchGoods();
   }, []);
 
   return (
     <main className='container content'>
-      <Cart quantity={order.length} handleBasketShow={handleBasketShow} />
-      {isBasketShow && (
-        <BasketList
-          order={order}
-          handleBasketShow={handleBasketShow}
-          removeFromBasket={removeFromBasket}
-          decQuantity={decQuantity}
-          incQuantity={incQuantity}
-        />
-      )}
-      {loading ? (
-        <Preloader />
-      ) : (
-        <GoodsList goods={goods} addToBasket={addToBasket} />
-      )}
-      {alertName && <Alert name={alertName} closeAlert={closeAlert} />}
+      <Cart />
+      {isBasketShow && <BasketList />}
+      {loading ? <Preloader /> : <GoodsList />}
+      {alertName && <Alert />}
     </main>
   );
 };
