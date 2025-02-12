@@ -6,8 +6,8 @@
 
 ### before refactor (with propDrilling)
 
-![alt text]({20F312E4-03B1-4FAA-8689-AA92E2BCA738}.png)
+![alt text](image-2.png)
 
 ### after refactor, use useContext, useReducer, without state libs
 
-![alt text]({4203E382-8974-402A-9DF0-7A66183BACF1}.png)
+![alt text](image-3.png)
